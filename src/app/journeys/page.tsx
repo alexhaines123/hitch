@@ -1,13 +1,13 @@
-import Button from '@/components/Button';
 import Journey from '@/components/Journey';
 import { Interfaces } from '@/types/interfaces';
+import Link from 'next/link';
 
 const data: Interfaces.Journey[] = [
   {
     firstName: 'Sam',
     origin: 'Norwich',
     destination: 'London',
-    date: new Date().toISOString(),
+    date: new Date().toString(),
   },
   {
     firstName: 'Alex',
@@ -29,17 +29,19 @@ const data: Interfaces.Journey[] = [
   },
 ];
 
-export default function Home() {
+export default function Page() {
   return (
-    <main className="flex flex-col items-center p-24">
+    <>
       <h1>Journeys</h1>
       <div className="w-full">
         {data.map((i) => (
           <div key={i.firstName} className="mb-2">
-            <Journey journey={i} />
+            <Link href="/journeys/norlon">
+              <Journey journey={i} />
+            </Link>
           </div>
         ))}
       </div>
-    </main>
+    </>
   );
 }

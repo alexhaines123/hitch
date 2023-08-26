@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
+import Map from '@/components/Map';
 
 config.autoAddCss = false;
 
@@ -21,9 +22,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <section className="flex min-h-screen flex-col items-center justify-between">
-          {children}
-        </section>
+        <main className="flex flex-col items-center">
+          <section className="flex flex-col items-center justify-between max-w-md mx-auto">
+            {children}
+          </section>
+        </main>
       </body>
     </html>
   );
