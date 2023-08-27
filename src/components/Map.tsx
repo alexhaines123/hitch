@@ -1,36 +1,56 @@
 'use client';
-import React, { useEffect, useRef } from 'react';
-import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
+import React, { useEffect, useState } from 'react';
+import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
+import markerShadow from 'leaflet/dist/images/marker-shadow.png';
+import markerIcon from 'leaflet/dist/images/marker-icon.png';
+import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png';
 import 'leaflet-routing-machine';
-// import 'leaflet-routing-machine/dist/leaflet-routing-machine'
+import 'leaflet-routing-machine/dist/leaflet-routing-machine.js';
+import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
+// import 'leaflet-routing-machine/dist/leaflet-routing-machine.png'
 
 interface Props {
-  children?: React.ReactNode;
+  routing?: {
+    origin: Interfaces.Location;
+    destination: Interfaces.Location;
+  };
 }
+
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl: markerIcon2x.src,
+  iconUrl: markerIcon.src,
+  shadowUrl: markerShadow.src,
+});
 
 const MAP_ID = 'leaflet-map';
 
-const Component: React.FC<Props> = (props) => {
+const Map: React.FC<Props> = ({ routing }) => {
+  const [map, setMap] = useState<L.Map>();
 
-  return (
-    <MapContainer
-      center={[51.505, -0.09]}
-      zoom={13}
-      scrollWheelZoom={false}
-      style={{ height: 400, width: '100%' }}
-    >
-      <TileLayer
-        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-      />
-      <Marker position={[51.505, -0.09]}>
-        <Popup>
-          A pretty CSS3 popup. <br /> Easily customizable.
-        </Popup>
-      </Marker>
-    </MapContainer>
-  );
+  useEffect(() => {
+    const mapInst = L.map(MAP_ID);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors',
+    }).addTo(mapInst);
+
+    setMap(mapInst);
+  }, []);
+
+  useEffect(() => {
+    if (routing && map) {
+      L.Routing.control({
+        waypoints: [
+          L.latLng(routing.origin.lat, routing.origin.long),
+          L.latLng(routing.destination.lat, routing.destination.long),
+        ],
+        routeWhileDragging: true,
+      }).addTo(map);
+    }
+  }, [routing, map]);
+
+  return <div id={MAP_ID} style={{ width: '100%', height: '100%' }}></div>;
 };
 
-export default Component;
+export default Map;
