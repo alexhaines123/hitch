@@ -21,7 +21,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={`${inter.className} m-1`}>
         <main className="max-w-md mx-auto">
           <Nav></Nav>
           <section className="">
