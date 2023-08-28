@@ -6,15 +6,13 @@ import markerShadow from 'leaflet/dist/images/marker-shadow.png';
 import markerIcon from 'leaflet/dist/images/marker-icon.png';
 import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png';
 import 'leaflet-routing-machine';
-import 'leaflet-routing-machine/dist/leaflet-routing-machine.js';
-import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
-// import 'leaflet-routing-machine/dist/leaflet-routing-machine.png'
 
 interface Props {
   routing?: {
     origin: Interfaces.Location;
     destination: Interfaces.Location;
   };
+  userLocation?: GeolocationPosition;
 }
 
 L.Icon.Default.mergeOptions({
@@ -25,7 +23,7 @@ L.Icon.Default.mergeOptions({
 
 const MAP_ID = 'leaflet-map';
 
-const Map: React.FC<Props> = ({ routing }) => {
+const Map: React.FC<Props> = ({ routing, userLocation }) => {
   const [map, setMap] = useState<L.Map>();
 
   useEffect(() => {
@@ -49,6 +47,15 @@ const Map: React.FC<Props> = ({ routing }) => {
       }).addTo(map);
     }
   }, [routing, map]);
+
+  useEffect(() => {
+    if (userLocation && map) {
+      L.marker([
+        userLocation.coords.latitude,
+        userLocation.coords.longitude,
+      ]).addTo(map);
+    }
+  });
 
   return <div id={MAP_ID} style={{ width: '100%', height: '100%' }}></div>;
 };

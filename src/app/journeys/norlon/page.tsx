@@ -2,6 +2,7 @@
 import { formatISOStringDate, formatISOStringTime } from '@/utils/date';
 import dynamic from 'next/dynamic';
 import Button from '@/components/Button';
+import UserLocation from '@/utils/hooks/user-location';
 
 const data: Interfaces.Journey = {
   firstName: 'Sam',
@@ -14,11 +15,12 @@ export default function Page() {
   const Map = dynamic(async () => await import('@/components/Map'), {
     ssr: false,
   });
+  const userLocation = UserLocation();
 
   return (
     <main className="flex flex-col items-center">
       <section className="grid">
-        <h2 className='mb-2'>
+        <h2 className="mb-2">
           {data.firstName} is going from {data.origin.name} to{' '}
           {data.destination.name} on the {formatISOStringDate(data.date)} at{' '}
           {formatISOStringTime(data.date)}
@@ -29,6 +31,7 @@ export default function Page() {
         <div className="w-full h-96">
           <Map
             routing={{ origin: data.origin, destination: data.destination }}
+            userLocation={userLocation}
           ></Map>
         </div>
       </div>

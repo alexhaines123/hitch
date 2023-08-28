@@ -6,10 +6,10 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
-  --col-pri: #245A60;
-  --col-sec: #FF8B41;
-  --col-ter: #936F5C;
-  --col-light-pri: #FFE8D1;
+  --col-pri: #006755;
+  --col-light-pri: #7ED2BC;
+  --col-sec: #AF5D00;
+  --col-ter: #008D82;
   --col-white: #FFFFFF;
 }
 
