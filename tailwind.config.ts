@@ -15,7 +15,7 @@ const config: Config = {
       },
     },
     colors: {
-      'pri': '#1F7200',
+      'pri': '#002a23',
       'pri-light': '#98ECD5',
       'sec': '#1F7200',
       'ter': '#1F7200',
