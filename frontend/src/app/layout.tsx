@@ -4,6 +4,7 @@ import { Inter } from 'next/font/google';
 import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import Nav from '@/components/Nav';
+import { Providers } from '@/redux/providers';
 
 config.autoAddCss = false;
 
@@ -20,15 +21,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={`${inter.className} m-1 font-sans`}>
-        <main className="max-w-md mx-auto">
-          <Nav></Nav>
-          <section className="">
-            {children}
-          </section>
-        </main>
-      </body>
-    </html>
+    <Providers>
+      <html lang="en">
+        <body className={`${inter.className} m-1 font-sans`}>
+          <main className="max-w-md mx-auto">
+            <Nav></Nav>
+            <section className="">{children}</section>
+          </main>
+        </body>
+      </html>
+    </Providers>
   );
 }
