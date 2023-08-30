@@ -7,7 +7,8 @@ import { InjectModel } from '@nestjs/mongoose';
 @Injectable()
 export class JourneyService {
   constructor(
-    @InjectModel(Journey.name) private journeyModel: Model<JourneyDocument>,
+    @InjectModel(Journey.name)
+    private journeyModel: Model<JourneyDocument>,
   ) {}
 
   async create(dto: CreateJourneyDto): Promise<Journey> {
