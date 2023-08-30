@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
 import { JourneyController } from './journey.controller';
 import { JourneyService } from './journey.service';
-import { MongooseModule } from '@nestjs/mongoose';
 import { journeyProviders } from './journey.providers';
+import { DatabaseModule } from '../database/database.module';
 
 @Module({
-  imports: [MongooseModule.forRoot('mongodb://localhost/nest')],
+  imports: [DatabaseModule],
   controllers: [JourneyController],
   providers: [JourneyService, ...journeyProviders],
 })
-export class JourneyModule { }
+export class JourneyModule {}
