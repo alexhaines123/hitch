@@ -1,4 +1,4 @@
-This is a [Next.js](https://nextjs.org/), Nest.js with MongoDB project called HITCH to aid anyone to find someone to hitch a ride with!
+This is a [Next.js](https://nextjs.org/), Nest.js, GraphQL with MongoDB project called HITCH to aid anyone to find someone to hitch a ride with!
 ## Getting Started
 
 First, run the development server:
