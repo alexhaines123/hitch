@@ -1,13 +1,13 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { Model } from 'mongoose';
-import { Journey } from './interfaces/journey.interface';
 import { CreateJourneyDto } from './dto/create-journey.dto';
+import { JourneyDocument, Journey } from './schemas/journey.schema';
+import { InjectModel } from '@nestjs/mongoose';
 
 @Injectable()
 export class JourneyService {
   constructor(
-    @Inject('JOURNEY_MODEL')
-    private journeyModel: Model<Journey>,
+    @InjectModel(Journey.name) private journeyModel: Model<JourneyDocument>,
   ) {}
 
   async create(dto: CreateJourneyDto): Promise<Journey> {

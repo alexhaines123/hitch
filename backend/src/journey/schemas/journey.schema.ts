@@ -1,14 +1,16 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Field, ObjectType } from '@nestjs/graphql';
+import { Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
 
 export type JourneyDocument = HydratedDocument<Journey>;
 
+@ObjectType()
 @Schema()
 export class Journey {
-  @Prop()
+  @Field()
   origin: string;
 
-  @Prop()
+  @Field()
   destination: string;
 }
 

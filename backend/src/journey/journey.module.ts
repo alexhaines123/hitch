@@ -1,12 +1,19 @@
 import { Module } from '@nestjs/common';
-import { JourneyController } from './journey.controller';
 import { JourneyService } from './journey.service';
-import { journeyProviders } from './journey.providers';
-import { DatabaseModule } from '../database/database.module';
+import { JourneyResolver } from './journey.resolver';
+import { MongooseModule } from '@nestjs/mongoose';
+import { Journey, JourneySchema } from './schemas/journey.schema';
 
 @Module({
-  imports: [DatabaseModule],
-  controllers: [JourneyController],
-  providers: [JourneyService, ...journeyProviders],
+  // controllers: [JourneyController],
+  providers: [JourneyService, JourneyResolver],
+  imports: [
+    MongooseModule.forFeature([
+      {
+        name: Journey.name,
+        schema: JourneySchema,
+      },
+    ]),
+  ],
 })
 export class JourneyModule {}
