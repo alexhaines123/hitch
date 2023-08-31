@@ -5,6 +5,8 @@ import Button from '@/components/Button';
 import { useEffect } from 'react';
 import { Provider } from 'react-redux';
 import { useSelector, useDispatch } from 'react-redux';
+import { apolloClient } from '../graphql';
+import {ApolloProvider } from '@apollo/client';
 
 const CLIENT_ID =
   '1033575429085-600btkuju2l57h7gpbshvl1vrqapb8ro.apps.googleusercontent.com';
@@ -22,9 +24,13 @@ export default function Page() {
   const dispatch = useDispatch();
 
   return (
-    <main className="flex flex-col items-center p-24">
-      <h1>HITCH</h1>
-      <Button onClick={loginAction}>Login</Button>
-    </main>
+    <>
+      <ApolloProvider client={apolloClient}>
+        <main className="flex flex-col items-center p-24">
+          <h1>HITCH</h1>
+          <Button onClick={loginAction}>Login</Button>
+        </main>
+      </ApolloProvider>
+    </>
   );
 }

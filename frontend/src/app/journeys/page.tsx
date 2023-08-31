@@ -1,30 +1,30 @@
-'use client'
-
 import Journey from '@/components/Journey';
 import Link from 'next/link';
-import { testJourneys } from '@/data/testData';
+import { getApolloClient } from '@/graphql';
+import { gql } from '@apollo/client';
+import React from 'react';
 
-import {
-  useSelector,
-  useDispatch,
-  selectJourneys,
-  getJourneysAsync,
-} from '@/redux';
-import { useEffect } from 'react';
+export const dynamic = 'force-dynamic';
 
-export default function Page() {
-  const dispatch = useDispatch();
-  const journeys = useSelector(selectJourneys);
+const GET_JOURNEYS = gql`
+  query {
+    journeys {
+      origin,
+      destination,
+    }
+  }
+`;
 
-  useEffect(() => {
-    dispatch(getJourneysAsync());
-  }, [dispatch]);
-
+export default async function Page() {
+  const { data } = await getApolloClient().query({
+    query: GET_JOURNEYS,
+  });
+  console.log(data)
   return (
     <>
       <div className="w-full">
         <h1>Journeys</h1>
-        {journeys.map((i) => (
+        {data.journeys.map((i) => (
           <div key={i.firstName} className="mb-2">
             <Link href="/journeys/norlon">
               <Journey journey={i} />

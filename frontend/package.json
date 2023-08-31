@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@apollo/client": "^3.8.1",
+    "@apollo/experimental-nextjs-app-support": "^0.4.2",
     "@fortawesome/fontawesome-svg-core": "^6.4.2",
     "@fortawesome/free-regular-svg-icons": "^6.4.2",
     "@fortawesome/free-solid-svg-icons": "^6.4.2",
@@ -22,6 +24,7 @@
     "dayjs": "^1.11.9",
     "eslint": "8.47.0",
     "eslint-config-next": "13.4.19",
+    "graphql": "^16.8.0",
     "leaflet": "^1.9.4",
     "leaflet-routing-machine": "^3.2.12",
     "next": "13.4.19",
