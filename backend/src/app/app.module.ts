@@ -5,7 +5,7 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { join } from 'path';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import mongodbConfig from './database/mongodb.config';
+import mongodbConfig from 'src/mongodb.config';
 
 @Module({
   imports: [

@@ -2,11 +2,36 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Journey {
+input CreateJourneyInput {
   destination: String!
   origin: String!
 }
 
+type Journey {
+  _id: String!
+  destination: String!
+  origin: String!
+}
+
+input ListJourneyInput {
+  _id: String!
+  destination: String!
+  origin: String!
+}
+
+type Mutation {
+  createJourney(payload: CreateJourneyInput!): Journey!
+  deleteJourney(_id: String!): Journey!
+  updateJourney(payload: UpdateJourneyInput!): Journey!
+}
+
 type Query {
-  journeys: [Journey!]!
+  journey(_id: String!): Journey!
+  journeys(filters: ListJourneyInput): [Journey!]!
+}
+
+input UpdateJourneyInput {
+  _id: String!
+  destination: String!
+  origin: String!
 }
